@@ -1,0 +1,31 @@
+Игры:</br>
+<% if @games.present? %>
+	<table>
+		<thead>
+			<tr>
+				<th>Дата</th>
+				<th>Время начала</th>
+				<th>Время конца</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @games.each do |game| %>
+				<tr class="<%= cycle('even', 'odd') %>">
+					<td>
+						<%= "#{game.date}" %>
+					</td>
+					<td>
+						<%= "#{game.timeb}" %>
+					</td>
+					<td>
+						<%= "#{game.timee}" %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<p>
+		Ни одной игры еще нет
+	</p>
+<% end %>

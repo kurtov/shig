@@ -1,0 +1,9 @@
+<%= form_for @game, :url => games_path do |f| %>
+  <%= f.label :date, "Дата" %>
+  <%= f.text_field :date %></br>
+  <%= f.label :timeb, "Время начала" %>
+  <%= f.text_field :timeb %></br>
+  <%= f.label :timee, "Время конца" %>
+  <%= f.text_field :timee %></br>
+  <%= f.submit "Create" %>
+<% end %>
