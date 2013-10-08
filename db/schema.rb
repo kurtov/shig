@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007191113) do
+ActiveRecord::Schema.define(version: 20131008181207) do
 
-  create_table "game_persons", force: true do |t|
+  create_table "game_people", force: true do |t|
     t.integer  "game_id"
     t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "game_persons", ["game_id", "person_id"], name: "index_game_persons_on_game_id_and_person_id", unique: true
-  add_index "game_persons", ["person_id"], name: "index_game_persons_on_person_id"
+  add_index "game_people", ["game_id", "person_id"], name: "index_game_people_on_game_id_and_person_id", unique: true
+  add_index "game_people", ["person_id"], name: "index_game_people_on_person_id"
 
   create_table "games", force: true do |t|
     t.datetime "ddateb"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20131007191113) do
     t.datetime "updated_at"
   end
 
-  create_table "persons", force: true do |t|
+  create_table "people", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

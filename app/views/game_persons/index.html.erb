@@ -4,3 +4,26 @@
   <%= f.text_field :name %></br>
   <%= f.submit "Добавить" %>
 <% end %>
+
+<% if @people.present? %>
+	<table>
+		<thead>
+			<tr>
+				<th>Персонаж</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @people.each do |person| %>
+				<tr class="<%= cycle('even', 'odd') %>">
+					<td>
+						<%= "#{person.name}" %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<p>
+		Ни однго персонажа еще нет
+	</p>
+<% end %>

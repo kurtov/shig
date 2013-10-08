@@ -1,3 +1,4 @@
 class Person < ActiveRecord::Base
-  self.table_name = 'persons'
+  has_many :game_person
+  has_many :games, through: :game_person
 end
