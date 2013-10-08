@@ -53,6 +53,9 @@ Shig::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :games do
+    resources :persons, :controller => "game_persons", :only => [:index, :create, :destroy]
+  end
   
-  resources :games
 end

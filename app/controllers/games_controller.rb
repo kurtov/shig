@@ -23,10 +23,13 @@ class GamesController < ApplicationController
     @game.timeb=params[:game][:timeb]
     @game.timee=params[:game][:timee]
     
-    @game.save
+    @game.save      #Если бага - ошибка и оставлять на прежнем месте
+    
+    #render game_persons_path(@game)
+    redirect_to game_persons_path(@game)    # Тотчно ли тут нужен redirect_to?
   end
   
-  def show
+  def index
     @games = Game.all
   end
   
