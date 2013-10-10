@@ -9,31 +9,31 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended that you check this file into your version control system.
+# It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131008181207) do
+ActiveRecord::Schema.define(:version => 20131008181207) do
 
-  create_table "game_people", force: true do |t|
+  create_table "game_people", :force => true do |t|
     t.integer  "game_id"
     t.integer  "person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "game_people", ["game_id", "person_id"], name: "index_game_people_on_game_id_and_person_id", unique: true
-  add_index "game_people", ["person_id"], name: "index_game_people_on_person_id"
+  add_index "game_people", ["game_id", "person_id"], :name => "index_game_persons_on_game_id_and_person_id", :unique => true
+  add_index "game_people", ["person_id"], :name => "index_game_persons_on_person_id"
 
-  create_table "games", force: true do |t|
+  create_table "games", :force => true do |t|
     t.datetime "ddateb"
     t.datetime "ddatee"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  create_table "people", force: true do |t|
+  create_table "people", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
