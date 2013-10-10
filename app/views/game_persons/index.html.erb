@@ -1,9 +1,10 @@
 Игра от <%= @game.date %> (время проведения с <%= @game.timeb %> по <%= @game.timee %>)</br>
 <%= form_for Person.new, :as => :person, :url => game_persons_path do |f| %>
   <%= f.label :name, "Введите персонажа:" %>
-  <%= f.text_field :name %></br>
+  <%= f.text_field :name %>
   <%= f.submit "Добавить" %>
 <% end %>
+<%= link_to 'Посмотреть результаты игры.', game_twitts_path(@game) %>
 
 <% if @people.present? %>
 	<table>

@@ -34,7 +34,6 @@ class GamePersonsController < ApplicationController
     render :index
   end
   
-  #todo При делете в адресе остается id партнера. что не оч. красиво. надо что то придумать
   def destroy
     game_id = params[:game_id].to_i
     id = params[:id].to_i

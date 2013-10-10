@@ -58,5 +58,10 @@ Shig::Application.routes.draw do
 
   resources :games do
     resources :persons, :controller => "game_persons", :only => [:index, :create, :destroy]
+    resources :twitts, :controller => "game_twitts", :only => [:index]
+    
+    get :go, :on => :member, :controller => "game_twitts"
   end
+  
+  #get 'game_twitts/go/:game_id', :to => "game_twitts#go" 
 end
