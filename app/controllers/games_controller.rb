@@ -33,10 +33,18 @@ class GamesController < ApplicationController
     @games = Game.all
   end
   
+  def destroy
+    game_id = params[:id]
+    game = Game.find(game_id)
+    game.destroy
+    
+    @games = Game.all
+    redirect_to games_path #Если сделать render, то останится ссылка на удаление и F5 упадет
+  end
+  
   private
     def get_friday
       today = Date.today
       today - today.cwday + 5
-    end
-      
+    end      
 end

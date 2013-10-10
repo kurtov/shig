@@ -6,6 +6,7 @@
 				<th>Дата</th>
 				<th>Время начала</th>
 				<th>Время конца</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,6 +20,9 @@
 					</td>
 					<td>
 						<%= "#{game.timee}" %>
+					</td>
+					<td>
+						<%= link_to 'Удалить', game_path(game), method: :delete %>
 					</td>
 				</tr>
 			<% end %>

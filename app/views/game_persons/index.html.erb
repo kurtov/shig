@@ -9,7 +9,8 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Персонаж</th>
+				<th>Персоны</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,6 +18,9 @@
 				<tr class="<%= cycle('even', 'odd') %>">
 					<td>
 						<%= "#{person.name}" %>
+					</td>
+					<td>
+						<%= link_to 'Удалить', [@game, person], method: :delete %>
 					</td>
 				</tr>
 			<% end %>
