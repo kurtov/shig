@@ -2,6 +2,7 @@ class Game < ActiveRecord::Base
   #attr_accessible :date, :timeb, :timee
   
   has_many :game_person
+  has_many :twitts
   has_many :people, through: :game_person
   
   before_save :convert_to_datetime

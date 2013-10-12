@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131008181207) do
+ActiveRecord::Schema.define(:version => 20131011193919) do
 
   create_table "game_people", :force => true do |t|
     t.integer  "game_id"
@@ -35,5 +35,20 @@ ActiveRecord::Schema.define(:version => 20131008181207) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "twitts", :force => true do |t|
+    t.string   "id_str"
+    t.datetime "ddate"
+    t.string   "text"
+    t.string   "from_user"
+    t.integer  "game_id"
+    t.integer  "person_id"
+    t.integer  "result"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "twitts", ["game_id"], :name => "index_twitts_on_game_id"
+  add_index "twitts", ["id_str"], :name => "index_twitts_on_id_str", :unique => true
 
 end
