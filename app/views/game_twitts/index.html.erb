@@ -51,10 +51,16 @@
 						<%= "#{twitt.from_user}" %>
 					</td>
 					<td>
-						<%= "#{twitt.person.name if twitt.person}" %>
+						<%= "#{twitt.people.map{|p| p.name}.join('; ')}" %>
 					</td>
 					<td>
-						<%= "Да" if twitt.result == 1 %>
+						<% if twitt.twitt_person.where(:first => 1).size == 1 %>
+							<%= "Да" %>
+						<% else %>
+							<% if twitt.twitt_person.where(:first => 1).size > 1 %>
+								<%= "Да!!!" %>
+							<% end %>
+						<% end %>
 					</td>
 				</tr>
 			<% end %>

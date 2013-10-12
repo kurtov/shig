@@ -1,27 +1,21 @@
 # encoding: utf-8
 class GameTwittsController < ApplicationController
-=begin
-  ё меняем на е
-  мс хаммер рус и инглиш
-  
-  todo:
-  в одном твитте может быть несколько правильных ответов!!!!
-=end
-  
-  
-  def index
-    puts "<<<<<<<<<#{params}"
+
+  #
+  # todo:
+  # Для знаменитостей сделать синонимы (мс хаммер рус и инглиш)
+  #
+  def index 
     
     game_id = params[:game_id].to_i
     @game = Game.find(game_id)
     @twitts = @game.twitts.order("ddate")
     
     @winners = []
-    winners = @game.twitts.where(:result => 1).order("from_user")
-    winners.each do |w|
-      @winners << {:from_user => w.from_user, :person => w.person.name}
-    end
-     
+    TwittPerson.joins(:twitt => :game).where(:first => 1, :games => {:id => game_id}).each do |tp|
+      @winners << {:from_user => tp.twitt.from_user, :person => tp.person.name}
+    end   
+    puts @winners.sort! {|a, b| a[:from_user] <=> b[:from_user]}
   end
   
   def go
@@ -70,35 +64,25 @@ class GameTwittsController < ApplicationController
     end
     
     def match_people game
-      people = []
-
-      game.people.each do |p|
-        people << {:person => p, :name => p.name.mb_chars.upcase.to_s.gsub(/Ё/, "Ё" => "Е").split.sort, :ddate => nil}
-      end
+      people = game.people 
       
       game.twitts.order("ddate").each do |t|
-        text = t.text.mb_chars.upcase.to_s.gsub(/Ё/, "Ё" => "Е").split.sort
-
         people.each do |p|
-          if text & p[:name] == p[:name]
-            t.person_id = p[:person].id
+          
+          #Если твитт содержит все слова из знаменитости
+          if t.text_to_ary & p.name_to_ary == p.name_to_ary 
+            tp = TwittPerson.new
+            tp.twitt = t
+            tp.person = p
             
-            if p[:ddate].nil? || p[:ddate] == t.ddate
-              t.result = 1
-              p[:ddate] = t.ddate
+            #Если это первое упоминание знаменитости
+            if p.date_first.nil? || p.date_first == t.ddate
+              tp.first = 1
+              p.date_first = t.ddate
             end
-            t.save
-            
-            
-            puts "ok!"
-            break
+            tp.save
           end
         end
-        puts "#{text}"
-#        twitts << {:twitt => t, :name => t.text.mb_chars.upcase.gsub(/Ё/, "Ё" => "Е")}
       end
-      
-      people.each {|x| puts "#{x[:name]}"}
-      nil
     end
 end
