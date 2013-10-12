@@ -1,1 +1,63 @@
 <%= link_to "Получить результаты", go_game_path(@game)%>
+
+</br>
+<% if @winners.present? %>
+	Первыми ответили:
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Автор</th>
+				<th>Знаменитость</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @winners.each do |w| %>
+				<tr class="<%= cycle('even', 'odd') %>">
+					<td>
+						<%= "#{w[:from_user]}" %>
+					</td>
+					<td>
+						<%= "#{w[:person]}" %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+
+</br>
+<% if @twitts.present? %>
+	Перечень твиттов:
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Время</th>
+				<th>Твитт</th>
+				<th>Автор</th>
+				<th>Определившаяся знаменитость</th>
+				<th>Первый</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @twitts.each do |twitt| %>
+				<tr class="<%= cycle('even', 'odd') %>">
+					<td>
+						<%= "#{twitt.ddate.in_time_zone('Moscow').strftime('%H:%M:%S')}" %>
+					</td>
+					<td>
+						<%= "#{twitt.text }" %>
+					</td>
+					<td>
+						<%= "#{twitt.from_user}" %>
+					</td>
+					<td>
+						<%= "#{twitt.person.name if twitt.person}" %>
+					</td>
+					<td>
+						<%= "Да" if twitt.result == 1 %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
