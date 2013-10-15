@@ -54,13 +54,7 @@
 						<%= "#{twitt.people.map{|p| p.name}.join('; ')}" %>
 					</td>
 					<td>
-						<% if twitt.twitt_person.where(:first => 1).size == 1 %>
-							<%= "Да" %>
-						<% else %>
-							<% if twitt.twitt_person.where(:first => 1).size > 1 %>
-								<%= "Да!!!" %>
-							<% end %>
-						<% end %>
+						<%= "#{twitt.first_people_to_s}" %>
 					</td>
 				</tr>
 			<% end %>
