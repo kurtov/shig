@@ -39,3 +39,4 @@ gem 'jquery-rails'
 
 gem 'settingslogic'
 gem 'twitter', '4.8.1'
+gem 'bootstrap-sass', '~> 2.3.2.1'
