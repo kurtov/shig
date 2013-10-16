@@ -13,8 +13,8 @@ class GamesController < ApplicationController
     
     #Найдем пятницу текущей недели
     friday = get_friday
-    @game.ddateb = DateTime.new(friday.year, friday.month, friday.day, 18, 0, 0) #, "+04:00")  ???
-    @game.ddatee = DateTime.new(friday.year, friday.month, friday.day, 19, 0, 0) #, "+04:00")
+    @game.ddateb = DateTime.new(friday.year, friday.month, friday.day, 18, 0, 0, "+04:00")
+    @game.ddatee = DateTime.new(friday.year, friday.month, friday.day, 19, 0, 0, "+04:00")
   end
   
   def create

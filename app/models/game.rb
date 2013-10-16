@@ -33,10 +33,7 @@ class Game < ActiveRecord::Base
   end
   
   def convert_to_datetime
-    self.ddateb = DateTime.parse("#{@date} #{@timeb}")
-    self.ddatee = DateTime.parse("#{@date} #{@timee}")
-    
-    logger.info "#{@date} #{@timeb}"
-    logger.info ddateb
+    self.ddateb = DateTime.parse("#{@date} #{@timeb} +04:00")
+    self.ddatee = DateTime.parse("#{@date} #{@timee} +04:00")
   end
 end

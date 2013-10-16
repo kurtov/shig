@@ -15,7 +15,7 @@ class GameTwittsController < ApplicationController
     TwittPerson.joins(:twitt => :game).where(:first => 1, :games => {:id => game_id}).each do |tp|
       @winners << {:from_user => tp.twitt.from_user, :person => tp.person.name}
     end   
-    puts @winners.sort! {|a, b| a[:from_user] <=> b[:from_user]}
+    @winners.sort! {|a, b| a[:from_user] <=> b[:from_user]}
   end
   
   def go
@@ -30,8 +30,8 @@ class GameTwittsController < ApplicationController
   #private
     def get_twitts game
       date =  game.ddateb.to_date + 1
-      timeb = (game.ddateb.in_time_zone("Moscow")-4*60*60).to_time  #+(20*60)).to_time
-      timee = (game.ddatee.in_time_zone("Moscow")-4*60*60).to_time
+      timeb = game.ddateb.to_time #Тут время UTC
+      timee = game.ddatee.to_time
 
       @twitts = []
   
