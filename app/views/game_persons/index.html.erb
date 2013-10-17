@@ -1,13 +1,17 @@
-Игра от <%= @game.date %> (время проведения с <%= @game.timeb %> по <%= @game.timee %>)</br>
-<%= form_for Person.new, :as => :person, :url => game_persons_path do |f| %>
-  <%= f.label :name, "Введите персонажа:" %>
-  <%= f.text_field :name %>
-  <%= f.submit "Добавить" %>
+Игра от <%= @game.date %> (время проведения с <%= @game.timeb %> по <%= @game.timee %>)<br/>
+<%= form_for Person.new, :as => :person, :url => game_persons_path, :html => {:class => "form-inline", :role => "form"} do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "Введите персонажа:", :class => "sr-only" %>
+    <%= f.text_field :name, :class => "form-control", :placeholder => "Введите персонажа" %>
+  </div>
+  <%= f.submit "Добавить", :class => "btn btn-default" %>
 <% end %>
+
+
 <%= link_to 'Посмотреть результаты игры.', game_twitts_path(@game) %>
 
 <% if @people.present? %>
-	<table>
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Персоны</th>
@@ -16,7 +20,7 @@
 		</thead>
 		<tbody>
 			<% @people.each do |person| %>
-				<tr class="<%= cycle('even', 'odd') %>">
+				<tr>
 					<td>
 						<%= "#{person.name}" %>
 					</td>
