@@ -4,7 +4,7 @@
 </br>
 <% if @winners.present? %>
 	Первыми ответили:
-	<table border="1">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Автор</th>
@@ -13,7 +13,7 @@
 		</thead>
 		<tbody>
 			<% @winners.each do |w| %>
-				<tr class="<%= cycle('even', 'odd') %>">
+				<tr>
 					<td>
 						<%= "#{w[:from_user]}" %>
 					</td>
@@ -29,7 +29,7 @@
 </br>
 <% if @twitts.present? %>
 	Перечень твиттов:
-	<table border="1">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Время</th>
@@ -41,7 +41,7 @@
 		</thead>
 		<tbody>
 			<% @twitts.each do |twitt| %>
-				<tr class="<%= cycle('even', 'odd') %>">
+				<tr>
 					<td>
 						<%= "#{twitt.ddate.in_time_zone('Moscow').strftime('%H:%M:%S')}" %>
 					</td>
