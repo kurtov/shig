@@ -1,3 +1,4 @@
+<%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
 Игра от <%= @game.date %> (время проведения с <%= @game.timeb %> по <%= @game.timee %>)<br/>
 <%= form_for Person.new, :as => :person, :url => game_persons_path, :html => {:class => "form-inline", :role => "form"} do |f| %>
   <div class="form-group">
