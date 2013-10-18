@@ -33,6 +33,24 @@ class GamesController < ApplicationController
     @games = Game.all
   end
   
+  def edit
+    id = params[:id].to_i
+    @game = Game.find(id)
+  end
+  
+  def update
+    game_id = params[:id]
+    game = Game.find(game_id)
+    
+    game.date=params[:game][:date]
+    game.timeb=params[:game][:timeb]
+    game.timee=params[:game][:timee]
+    
+    game.save      #Если бага - ошибка и оставлять на прежнем месте
+    
+    redirect_to games_path
+  end
+  
   def destroy
     game_id = params[:id]
     game = Game.find(game_id)

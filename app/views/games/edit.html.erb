@@ -1,0 +1,11 @@
+<%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
+
+<%= form_for @game, :url => game_path(@game), :method => :put, :html => {:class => "form-horizontal", :role => "form"} do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit "Изменить", :class => "btn btn-default"%>
+    </div>
+  </div>
+<% end %>

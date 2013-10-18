@@ -7,6 +7,7 @@
 				<th>Время начала</th>
 				<th>Время конца</th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,6 +21,9 @@
 					</td>
 					<td>
 						<%= "#{game.timee}" %>
+					</td>
+					<td>
+						<%= link_to 'Редактировать', edit_game_path(game) %>
 					</td>
 					<td>
 						<%= link_to 'Удалить', game_path(game), method: :delete %>
