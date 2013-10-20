@@ -15,34 +15,11 @@ class GamePersonsController < ApplicationController
   def new
     game_id = params[:game_id].to_i
     @game = Game.find(game_id)
-
   end
 
-=begin  
-  def edit
-    game_id = params[:game_id].to_i
-    @game = Game.find(game_id)    
-    
-    id = params[:id].to_i
-    @person = Person.find(id)
-  end
-  
-  
-  def update
-    game_id = params[:game_id].to_i
-    @game = Game.find(game_id)    
-    
-    id = params[:id].to_i
-    @person = Person.find(id)
-    
-    name = params[:person][:name].to_s
-    @person.name = name
-    @person.save
-    
-    #render :edit
-    redirect_to edit_game_person_path(@game, @person)
-  end
-=end
+  #
+  # todo
+  # Подумать о возможности как-то использовать часть экшена create контроллера PeopleController
   def create
     game_id = params[:game_id].to_i
     @game = Game.find(game_id)
