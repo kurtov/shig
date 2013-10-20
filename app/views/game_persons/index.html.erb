@@ -1,21 +1,16 @@
-<%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
-Игра от <%= @game.date %> (время проведения с <%= @game.timeb %> по <%= @game.timee %>)<br/>
-<%= form_for Person.new, :as => :person, :url => game_persons_path, :html => {:class => "form-inline", :role => "form"} do |f| %>
-  <div class="form-group">
-    <%= f.label :name, "Введите персонажа:", :class => "sr-only" %>
-    <%= f.text_field :name, :class => "form-control", :placeholder => "Введите персонажа" %>
-  </div>
-  <%= f.submit "Добавить", :class => "btn btn-default" %>
+<% content_for :left_nav do%>
+  <%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
 <% end %>
 
-
-<%= link_to 'Посмотреть результаты игры.', game_twitts_path(@game) %>
+<%#= link_to 'Добавить знаменитость', new_person_path(:game_id => @game.id) %>
+<%= link_to 'Добавить знаменитость', new_game_person_path(@game) %>
 
 <% if @people.present? %>
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Персоны</th>
+				<th>Знаменитости</th>
+				<th></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -24,6 +19,9 @@
 				<tr>
 					<td>
 						<%= "#{person.name}" %>
+					</td>
+					<td>
+						<%= link_to 'Редактировать', edit_person_path(person, :game_id => @game.id) %>
 					</td>
 					<td>
 						<%= link_to 'Удалить', [@game, person], method: :delete %>

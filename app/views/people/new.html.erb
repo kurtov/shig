@@ -1,0 +1,9 @@
+<%= form_for Person.new, :url => people_path, :html => {:class => "form-horizontal", :role => "form"} do |f| %>
+  <%= render :partial => 'shared/person_form', :locals => { :f => f } %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit "Создать", :class => "btn btn-default"%>
+    </div>
+  </div>
+<% end %>

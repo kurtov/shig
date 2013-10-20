@@ -57,11 +57,12 @@ Shig::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   resources :games do
-    resources :persons, :controller => "game_persons", :only => [:index, :create, :destroy]
+    resources :persons, :controller => "game_persons"
     resources :twitts, :controller => "game_twitts", :only => [:index]
     
     get :go, :on => :member, :controller => "game_twitts"
   end
   
+  resources :people #, :controller => "game_persons"
   #get 'game_twitts/go/:game_id', :to => "game_twitts#go" 
 end

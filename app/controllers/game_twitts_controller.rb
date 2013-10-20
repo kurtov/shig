@@ -1,5 +1,6 @@
 # encoding: utf-8
 class GameTwittsController < ApplicationController
+  layout "game_layout"
 
   #
   # todo:
@@ -23,6 +24,7 @@ class GameTwittsController < ApplicationController
     @game = Game.find(game_id)
     
     get_twitts @game
+    #match_people @game
     
     redirect_to game_twitts_path(@game) 
   end
@@ -64,17 +66,16 @@ class GameTwittsController < ApplicationController
     end
     
     def match_people game
-      people = game.people 
+      people = game.people(true) 
       
-      game.twitts.order("ddate").each do |t|
+      game.twitts(true).order("ddate").each do |t|
         people.each do |p|
           
-          #Если твитт содержит все слова из знаменитости
-          if t.text_to_ary & p.name_to_ary == p.name_to_ary 
+          if TextComparator.compare t, p
             tp = TwittPerson.new
             tp.twitt = t
             tp.person = p
-            
+
             #Если это первое упоминание знаменитости
             if p.date_first.nil? || p.date_first == t.ddate
               tp.first = 1
@@ -84,5 +85,7 @@ class GameTwittsController < ApplicationController
           end
         end
       end
+      
+      nil
     end
 end

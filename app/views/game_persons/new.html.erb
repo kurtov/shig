@@ -1,0 +1,16 @@
+<% content_for :left_nav do%>
+  <%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
+<% end %>
+
+<%= form_for Person.new, :as => :person, :url => game_persons_path(@game), :html => {:class => "form-horizontal", :role => "form"} do |f| %>
+  <%= render :partial => 'shared/person_form', :locals => { :f => f } %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit "Создать", :class => "btn btn-default"%>
+    </div>
+  </div>
+<% end %>
+
+<h3>Синонимы</h3>
+Еще нет ни одного синонима. <%#= link_to 'Добавить синоним', new_game_person_path(@game) %>

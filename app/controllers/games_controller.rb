@@ -8,6 +8,8 @@
  3. заполнить флеш: удачно/неудачно сохранилось
 =end
 class GamesController < ApplicationController
+  layout "game_layout", :only => :edit 
+  
   def new
     @game = Game.new
     

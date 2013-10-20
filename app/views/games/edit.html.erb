@@ -1,4 +1,6 @@
-<%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
+<% content_for :left_nav do%>
+  <%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
+<% end %>
 
 <%= form_for @game, :url => game_path(@game), :method => :put, :html => {:class => "form-horizontal", :role => "form"} do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>

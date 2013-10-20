@@ -1,0 +1,32 @@
+Знаменитости:</br>
+<% if @people.present? %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Знаменитость</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @people.each do |person| %>
+				<tr>
+					<td>
+						<%= "#{person.name}" %>
+					</td>
+					<td>
+						<%= link_to 'Редактировать', edit_person_path(person) %>
+					</td>
+					<td>
+						<%= link_to 'Удалить', person_path(person), method: :delete %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<p>
+		Ни одной знаменитости еще нет
+	</p>
+<% end %>
+<%= link_to "Создать новую", new_person_path %>

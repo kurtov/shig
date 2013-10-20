@@ -1,0 +1,9 @@
+<% if @game%>
+  <%= hidden_field_tag :game_id, @game.id %>
+<% end %>
+<div class="form-group">
+  <%= f.label :name, "Знаменитость", :class => "col-lg-2 control-label" %>
+  <div class="col-lg-10">
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+</div>

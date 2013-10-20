@@ -1,4 +1,6 @@
-<%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
+<% content_for :left_nav do%>
+  <%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
+<% end %>
 <%= link_to "Получить результаты", go_game_path(@game)%>
 
 </br>

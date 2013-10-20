@@ -7,14 +7,7 @@ class Twitt < ActiveRecord::Base
   
   validates :id_str, uniqueness: true
   
-  #
-  # todo:
-  # Одинаковый метод с Person. Надо как-то вынести общую часть
-  #
-  def text_to_ary
-    text.mb_chars.upcase.to_s.gsub(/Ё/, "Ё" => "Е").split.sort
-  end
-  
+ 
   def first_people
     Person.joins(:twitt_person).where(:twitt_people => {:first => 1, :twitt_id => self.id})
   end
