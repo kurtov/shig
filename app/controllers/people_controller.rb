@@ -50,7 +50,7 @@ class PeopleController < ApplicationController
     if params[:game_id]
       game_id = params[:game_id].to_i
       @game = Game.find(game_id)
-      redirect_to game_persons_path(@game) #, @person)
+      redirect_to game_persons_path(@game)
     elsif
       redirect_to people_path
     end

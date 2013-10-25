@@ -1,0 +1,10 @@
+<% if target && target.errors.any? %>
+  <div class="alert alert-danger">
+    <p>Не удается произвести сохнанение. Созникли следующими проблемы</p>
+     <ul>
+     <% target.errors.full_messages.each do |msg| %>
+       <li><%= msg %></li>
+     <% end %>
+     </ul>
+  </div>
+<% end %>

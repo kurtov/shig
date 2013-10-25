@@ -1,6 +1,6 @@
 # encoding: utf-8
 class GameTwittsController < ApplicationController
-  layout "game_layout"
+  #layout "game_layout"
 
   #
   # todo:

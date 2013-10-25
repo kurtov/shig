@@ -1,34 +1,26 @@
 # encoding: utf-8
-
-=begin
-   
- todo
- 1. надо ли делать +04:00
- 2. не работает Game.new(params[:game])
- 3. заполнить флеш: удачно/неудачно сохранилось
-=end
 class GamesController < ApplicationController
-  layout "game_layout", :only => :edit 
+  #layout "game_layout", :only => :edit
+  before_filter :find_game, :only => [:edit, :update, :destroy]
   
   def new
     @game = Game.new
     
     #Найдем пятницу текущей недели
     friday = get_friday
-    @game.ddateb = DateTime.new(friday.year, friday.month, friday.day, 18, 0, 0, "+04:00")
-    @game.ddatee = DateTime.new(friday.year, friday.month, friday.day, 19, 0, 0, "+04:00")
+    @game.ddateb = Time.zone.parse("#{friday} 18:00").to_datetime
+    @game.ddatee = Time.zone.parse("#{friday} 19:00").to_datetime
   end
   
   def create
-    @game = Game.new #(params[:game])   ?????
-    @game.date=params[:game][:date]
-    @game.timeb=params[:game][:timeb]
-    @game.timee=params[:game][:timee]
-    
-    @game.save      #Если бага - ошибка и оставлять на прежнем месте
-    
-    #render game_persons_path(@game)
-    redirect_to game_persons_path(@game)    # Тотчно ли тут нужен redirect_to?
+    @game = Game.new(params[:game])
+        
+    if @game.save
+      flash[:success] = "Игра успешно сохранена"
+      redirect_to game_persons_path(@game)
+    else
+      render :new
+    end
   end
   
   def index
@@ -36,33 +28,32 @@ class GamesController < ApplicationController
   end
   
   def edit
-    id = params[:id].to_i
-    @game = Game.find(id)
   end
   
   def update
-    game_id = params[:id]
-    game = Game.find(game_id)
-    
-    game.date=params[:game][:date]
-    game.timeb=params[:game][:timeb]
-    game.timee=params[:game][:timee]
-    
-    game.save      #Если бага - ошибка и оставлять на прежнем месте
-    
-    redirect_to games_path
+    if @game.update_attributes(params[:game])
+      flash[:success] = "Игра успешно обновлена"
+      redirect_to games_path
+    else
+      render :edit
+    end
   end
   
   def destroy
-    game_id = params[:id]
-    game = Game.find(game_id)
-    game.destroy
+    @game.destroy
     
     @games = Game.all
-    redirect_to games_path #Если сделать render, то останится ссылка на удаление и F5 упадет
+    
+    flash[:success] = "Игра успешно удалена"
+    redirect_to games_path
   end
   
   private
+    def find_game
+      game_id = params[:id].to_i
+      @game = Game.find(game_id)
+    end
+  
     def get_friday
       today = Date.today
       today - today.cwday + 5

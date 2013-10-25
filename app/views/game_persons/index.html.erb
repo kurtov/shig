@@ -2,8 +2,15 @@
   <%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
 <% end %>
 
-<%#= link_to 'Добавить знаменитость', new_person_path(:game_id => @game.id) %>
-<%= link_to 'Добавить знаменитость', new_game_person_path(@game) %>
+<%= content_for :page_name do %>
+	Знаменитости
+<% end %>
+
+<%= content_for :page_actions do %>
+	<%= link_to new_game_person_path(@game) , :class => "btn btn-success" do %>
+		<span class="glyphicon glyphicon-plus"></span> Добавить знаменитость
+	<% end %>
+<% end %>
 
 <% if @people.present? %>
 	<table class="table table-striped">
@@ -32,6 +39,6 @@
 	</table>
 <% else %>
 	<p>
-		Ни однго персонажа еще нет
+		Ни одной знаменитости еще нет
 	</p>
 <% end %>

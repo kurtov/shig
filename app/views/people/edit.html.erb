@@ -1,3 +1,7 @@
+<% content_for :left_nav do%>
+  <%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
+<% end %>
+
 <%= form_for @person, :as => :person, :url => person_path(@person), :method => :put, :html => {:class => "form-horizontal", :role => "form"} do |f| %>
   <%= render :partial => 'shared/person_form', :locals => { :f => f } %>
 
@@ -6,4 +10,37 @@
       <%= f.submit "Изменить", :class => "btn btn-default"%>
     </div>
   </div>
+<% end %>
+
+<h3>Синонимы</h3>
+<%= link_to 'Добавить синоним', new_person_synonym_path(@person) %>
+<% if @person.synonyms.present? %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Синонимы</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @person.synonyms.each do |synonym| %>
+				<tr>
+					<td>
+						<%= "#{synonym.name}" %>
+					</td>
+					<td>
+						<%= link_to 'Редактировать', edit_synonym_path(synonym) %>
+					</td>
+					<td>
+						<%= link_to 'Удалить', synonym_path(synonym), method: :delete %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<p>
+		Ни одного синонима еще нет
+	</p>
 <% end %>

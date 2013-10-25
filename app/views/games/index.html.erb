@@ -1,4 +1,13 @@
-Игры:</br>
+<%= content_for :page_name do %>
+	Игры
+<% end %>
+
+<%= content_for :page_actions do %>
+	<%= link_to new_game_path , :class => "btn btn-success" do %>
+		<span class="glyphicon glyphicon-plus"></span> Создать новую
+	<% end %>
+<% end %>
+
 <% if @games.present? %>
 	<table class="table table-striped">
 		<thead>
@@ -37,4 +46,3 @@
 		Ни одной игры еще нет
 	</p>
 <% end %>
-<%= link_to "Создать новую", new_game_path %>

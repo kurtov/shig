@@ -63,6 +63,7 @@ Shig::Application.routes.draw do
     get :go, :on => :member, :controller => "game_twitts"
   end
   
-  resources :people #, :controller => "game_persons"
-  #get 'game_twitts/go/:game_id', :to => "game_twitts#go" 
+  resources :people do
+    resources :synonyms, :shallow => true
+  end 
 end

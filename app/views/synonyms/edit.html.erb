@@ -1,0 +1,10 @@
+<h2>Редактирование синонима для знаменитости <%= @person.name %></h2>
+<%= form_for @synonym, :url => synonym_path(@synonym), :html => {:class => "form-horizontal", :role => "form"} do |f| %>
+  <%= render :partial => 'shared/synonym_form', :locals => { :f => f } %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit "Создать", :class => "btn btn-default"%>
+    </div>
+  </div>
+<% end %>

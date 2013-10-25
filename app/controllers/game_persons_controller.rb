@@ -1,29 +1,22 @@
 class GamePersonsController < ApplicationController
-  layout "game_layout"
+  #layout "game_layout"
+  before_filter :find_game, :only => [:index, :new, :create, :destroy]
   
   def index
     # todo
-    # отругать, если game_id - не число
-    # проверка прав
-    
-    game_id = params[:game_id].to_i
-    @game = Game.find(game_id)
+    # отругать, если game_id - не число    
     
     @people = @game.people
   end
   
   def new
-    game_id = params[:game_id].to_i
-    @game = Game.find(game_id)
   end
 
   #
   # todo
   # Подумать о возможности как-то использовать часть экшена create контроллера PeopleController
   def create
-    game_id = params[:game_id].to_i
-    @game = Game.find(game_id)
-    
+   
     # todo: тут проверить существует ли уже добавляемая персона. если да, то подставить ее id иначе:
     name = params[:person][:name].to_s
     
@@ -43,14 +36,19 @@ class GamePersonsController < ApplicationController
   end
   
   def destroy
-    game_id = params[:game_id].to_i
     id = params[:id].to_i
-    
-    game = Game.find(game_id)
+
     person = Person.find(id)
     
-    game.people.delete person
+    @game.people.delete person
     
-    redirect_to game_persons_path(game)
+    redirect_to game_persons_path(@game)
   end
+  
+  private
+    def find_game
+      game_id = params[:game_id].to_i
+      @game = Game.find(game_id)
+    end
+  
 end

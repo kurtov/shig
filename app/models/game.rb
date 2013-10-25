@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  #attr_accessible :date, :timeb, :timee
+  attr_accessible :date, :timeb, :timee
 
   has_many :twitts
 
@@ -9,15 +9,27 @@ class Game < ActiveRecord::Base
   before_save :convert_to_datetime
   
   def date
-    ddateb.strftime "%d-%m-%Y"
+    if @date
+      @date
+    else
+      ddateb.strftime "%d-%m-%Y"
+    end 
   end
   
   def timeb
-    ddateb.strftime "%H:%M"
+    if @timeb
+      @timeb
+    else
+      ddateb.strftime "%H:%M"
+    end
   end
   
   def timee
-    ddatee.strftime "%H:%M"
+    if @timee
+      @timee
+    else
+      ddatee.strftime "%H:%M"
+    end    
   end
   
   def date= date
