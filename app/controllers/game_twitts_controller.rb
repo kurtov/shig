@@ -28,6 +28,16 @@ class GameTwittsController < ApplicationController
     
     redirect_to game_twitts_path(@game) 
   end
+  
+  def who_win
+    game_id = params[:id].to_i
+    @game = Game.find(game_id)
+    
+    #get_twitts @game
+    match_people @game
+    
+    redirect_to game_twitts_path(@game) 
+  end
 
   #private
     def get_twitts game
@@ -71,7 +81,19 @@ class GameTwittsController < ApplicationController
       game.twitts(true).order("ddate").each do |t|
         people.each do |p|
           
-          if TextComparator.compare t, p
+          # Соответствует ли твитт персонажу
+          match = TextComparator.compare t, p
+          
+          # Если нет, то посмотреть совпадает ли с синонимом
+          if !match && p.synonyms
+            p.synonyms.each do |s|
+              match = TextComparator.compare t, s
+              
+              break if match
+            end
+          end
+          
+          if match
             tp = TwittPerson.new
             tp.twitt = t
             tp.person = p

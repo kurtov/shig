@@ -61,6 +61,7 @@ Shig::Application.routes.draw do
     resources :twitts, :controller => "game_twitts", :only => [:index]
     
     get :go, :on => :member, :controller => "game_twitts"
+    get :who_win, :on => :member, :controller => "game_twitts"
   end
   
   resources :people do

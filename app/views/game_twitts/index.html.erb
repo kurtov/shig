@@ -1,7 +1,19 @@
 <% content_for :left_nav do%>
   <%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
 <% end %>
-<%= link_to "Получить результаты", go_game_path(@game)%>
+
+<%= content_for :page_name do %>
+	Результаты игры
+<% end %>
+
+<%= content_for :page_actions do %>
+	<%= link_to go_game_path(@game) , :class => "btn btn-success" do %>
+		Получить твитты
+	<% end %>
+	<%= link_to who_win_game_path(@game) , :class => "btn btn-success" do %>
+		Определить победителя
+	<% end %>
+<% end %>
 
 </br>
 <% if @winners.present? %>
