@@ -4,6 +4,8 @@ class PeopleController < ApplicationController
   end
   
   def new
+    #@person = Person.new
+    
     if params[:game_id]
       game_id = params[:game_id].to_i
       @game = Game.find(game_id)

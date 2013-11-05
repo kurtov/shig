@@ -8,44 +8,63 @@
   <meta charset="utf-8">
 </head>
 <body>
-	
-<nav class="navbar navbar-default" role="navigation">
-	<!-- Brand and toggle get grouped for better mobile display -->
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="#">#ШрекИльичГоголь</a>
-	</div>
-	
-	<!-- Collect the nav links, forms, and other content for toggling -->
-	<div class="collapse navbar-collapse navbar-ex1-collapse">
-		<ul class="nav navbar-nav">
-			<li><%= link_to 'Игры', games_path %></li>
-			<li><%= link_to 'Знаменитости', people_path %></li>
-	    </ul>
-	</div>
-</nav>
+		
+	<nav class="navbar navbar-default" role="navigation">
+<div class="col-md-10">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">#ШрекИльичГоголь</a>
+		</div>
+		
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<%= tab :games, :game_persons, :game_twitts, :label => 'Игры'%>
+				<%= tab :people, :synonyms, :label => 'Знаменитости'%>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<% if user_signed_in? %>
+					<li>
+						<%= link_to destroy_user_session_path, :method => :delete do %>
+							<span class="glyphicon glyphicon-log-out"></span> Выйти
+						<% end %>
+					</li>
+				<% else %>
+					<li> 
+						<%= link_to new_user_session_path do %>
+							<span class="glyphicon glyphicon-log-in"></span> Войти
+						<% end %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+</div>
+	</nav>
 
-  <div class="row">
-  	<div class="col-md-2">
-   	  <%= yield :left_nav %>
-  	</div>
-	<div class="col-md-8">
-	  <div class="row">
-	  	<div class="col-md-4">
-	  		<%= yield :page_name %>		
-	  	</div>
-	  	<div class="col-md-4 col-md-offset-4">
-			<%= yield :page_actions %>
-	  	</div>
-	  </div>
-      <%= flash_messages %>
-      <%= yield %>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-md-2">
+			<%= yield :left_nav %>
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<%= flash_messages %>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<%= yield :page_name %>		
+				</div>
+				<div class="col-md-4 col-md-offset-4">
+					<%= yield :page_actions %>
+				</div>
+			</div>
+			<%= yield %>
+		</div>
+	</div>
 </body>
 </html>

@@ -61,5 +61,7 @@ module Shig
     config.assets.version = '1.0'
 
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
+    
+    config.i18n.default_locale = :ru
   end
 end

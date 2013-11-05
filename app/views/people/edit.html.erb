@@ -12,35 +12,4 @@
   </div>
 <% end %>
 
-<h3>Синонимы</h3>
-<%= link_to 'Добавить синоним', new_person_synonym_path(@person) %>
-<% if @person.synonyms.present? %>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Синонимы</th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @person.synonyms.each do |synonym| %>
-				<tr>
-					<td>
-						<%= "#{synonym.name}" %>
-					</td>
-					<td>
-						<%= link_to 'Редактировать', edit_synonym_path(synonym) %>
-					</td>
-					<td>
-						<%= link_to 'Удалить', synonym_path(synonym), method: :delete %>
-					</td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
-<% else %>
-	<p>
-		Ни одного синонима еще нет
-	</p>
-<% end %>
+<%= render :partial => 'shared/synonym_index', :locals => { :person => @person } %>

@@ -39,3 +39,4 @@ gem 'jquery-rails'
 
 gem 'settingslogic'
 gem 'twitter', '4.8.1'
+gem 'devise'
