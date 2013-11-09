@@ -1,5 +1,10 @@
 # encoding: utf-8
 class Person < ActiveRecord::Base
+  attr_accessible :name
+
+  validates :name, :presence => true
+  validates :name, :uniqueness => true
+  
   has_many :game_person
   has_many :games, through: :game_person
   

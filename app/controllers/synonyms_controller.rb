@@ -1,18 +1,33 @@
 # encoding: utf-8
 class SynonymsController < ApplicationController
+  
+  #
+  # Сообщения об ошибках в шаблонах для разных объектов
+  # - edit - для @synonym
+  # - new  - для @person
+  #
+  
   before_filter :find_person, :only => [:new, :create]
   before_filter :find_synonym_and_person, :only => [:edit, :update, :destroy]
 
   def new
   end
   
+  
+  #
+  # Может, создать синоним, а потом синониму назнасть знаменитость
+  # @synonym.person = @person
+  # тогда и одинаковые обхекты для сообщения об ошибок будут
+  # 
   def create
-    synonym = Synonym.new(params[:synonym])
-    synonym.save
+    @person.synonyms.build(params[:synonym])
     
-    @person.synonyms << synonym
-    
-    redirect_to edit_person_path @person
+    if @person.save
+      flash[:success] = "Синоним успешно сохранен"
+      redirect_to edit_person_path @person
+    else
+      render :new
+    end
   end
   
   def destroy

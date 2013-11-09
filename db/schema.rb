@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131030150044) do
+ActiveRecord::Schema.define(:version => 20131109181255) do
 
   create_table "game_people", :force => true do |t|
     t.integer  "game_id"
@@ -36,12 +36,16 @@ ActiveRecord::Schema.define(:version => 20131030150044) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "people", ["name"], :name => "index_people_on_name", :unique => true
+
   create_table "synonyms", :force => true do |t|
     t.integer  "person_id"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "synonyms", ["person_id", "name"], :name => "index_synonyms_on_person_id_and_name", :unique => true
 
   create_table "twitt_people", :force => true do |t|
     t.integer  "twitt_id"

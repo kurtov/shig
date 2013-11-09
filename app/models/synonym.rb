@@ -5,4 +5,5 @@ class Synonym < ActiveRecord::Base
   belongs_to :person
   
   validates :name, :presence => true
+  validates :name, uniqueness: { scope: :person_id}
 end

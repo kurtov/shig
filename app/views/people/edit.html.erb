@@ -2,6 +2,12 @@
   <%= render :partial => 'shared/navbar', :locals => { :game => @game } %>
 <% end %>
 
+<% content_for :page_name do %>
+  Редактировать знаменитость
+<% end %>
+
+<%= render :partial => 'shared/error_messages', :locals => { :target => @person } %>
+
 <%= form_for @person, :as => :person, :url => person_path(@person), :method => :put, :html => {:class => "form-horizontal", :role => "form"} do |f| %>
   <%= render :partial => 'shared/person_form', :locals => { :f => f } %>
 

@@ -1,24 +1,31 @@
+# encoding: utf-8
 class PeopleController < ApplicationController
+  before_filter :find_person, :only => [:edit, :update, :destroy]
+  
   def index
     @people = Person.all(:order => :name)
   end
   
   def new
-    #@person = Person.new
-    
+    @person = Person.new
+=begin    
     if params[:game_id]
       game_id = params[:game_id].to_i
       @game = Game.find(game_id)
-    end    
+    end
+=end    
   end
 
   def create
-    @people = Person.new
-    @people.name = params[:person][:name]
+    @person = Person.new(params[:person])
     
-    @people.save
-    
-    redirect_to people_path
+    if @person.save
+      flash[:success] = "Знаменитость успешно сохранена"
+      redirect_to people_path
+    else
+      render :new
+    end
+
 =begin
     # В зависимости от того откуда пришел запрос - туда и редирект
     if params[:game_id]
@@ -29,12 +36,10 @@ class PeopleController < ApplicationController
       redirect_to people_path
     end
 =end
+
   end
   
-  def edit
-    id = params[:id].to_i
-    @person = Person.find(id)
-    
+  def edit 
     if params[:game_id]
       game_id = params[:game_id].to_i
       @game = Game.find(game_id)
@@ -42,9 +47,6 @@ class PeopleController < ApplicationController
   end
 
   def update
-    id = params[:id].to_i
-    @person = Person.find(id)
-    
     @person.name = params[:person][:name]
     @person.save
 
@@ -56,14 +58,18 @@ class PeopleController < ApplicationController
     elsif
       redirect_to people_path
     end
+
   end    
   
   def destroy
-    id = params[:id]
-    @people = Person.find(id)
-    @people.destroy
-    
-   # @games = Game.all
+    @person.destroy
+ 
     redirect_to people_path #Если сделать render, то останится ссылка на удаление и F5 упадет
   end
+  
+  private
+    def find_person
+      id = params[:id]
+      @person = Person.find(id)
+    end
 end

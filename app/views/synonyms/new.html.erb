@@ -1,4 +1,9 @@
-<h2>Добавление синонима для знаменитости <%= @person.name %></h2>
+<% content_for :page_name do %>
+  Добавление синонима для знаменитости <%= @person.name %>
+<% end %>
+
+<%= render :partial => 'shared/error_messages', :locals => { :target => @person } %>
+
 <%= form_for Synonym.new, :url => person_synonyms_path(@person), :html => {:class => "form-horizontal", :role => "form"} do |f| %>
   <%= render :partial => 'shared/synonym_form', :locals => { :f => f } %>
 

@@ -1,4 +1,10 @@
-<%= form_for Person.new, :url => people_path, :html => {:class => "form-horizontal", :role => "form"} do |f| %>
+<%= render :partial => 'shared/error_messages', :locals => { :target => @person } %>
+
+<% content_for :page_name do %>
+  Создать знаменитость
+<% end %>
+
+<%= form_for @person, :url => people_path, :html => {:class => "form-horizontal", :role => "form"} do |f| %>
   <%= render :partial => 'shared/person_form', :locals => { :f => f } %>
 
   <div class="form-group">
