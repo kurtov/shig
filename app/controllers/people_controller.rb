@@ -21,7 +21,7 @@ class PeopleController < ApplicationController
     
     if @person.save
       flash[:success] = "Знаменитость успешно сохранена"
-      redirect_to people_path
+      redirect_to edit_person_path @person
     else
       render :new
     end
@@ -47,9 +47,13 @@ class PeopleController < ApplicationController
   end
 
   def update
-    @person.name = params[:person][:name]
-    @person.save
-
+    if @person.update_attributes(params[:person])
+      flash[:success] = "Знаменитость успешно обновлена"
+      redirect_to people_path
+    else
+      render :edit
+    end
+=begin
     # В зависимости от того откуда пришел запрос - туда и редирект
     if params[:game_id]
       game_id = params[:game_id].to_i
@@ -58,7 +62,7 @@ class PeopleController < ApplicationController
     elsif
       redirect_to people_path
     end
-
+=end
   end    
   
   def destroy

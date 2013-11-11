@@ -11,7 +11,13 @@
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit "Создать", :class => "btn btn-default"%>
+      <%= link_to edit_person_path(@person), :class => "btn btn-default" do %>
+        <span class="glyphicon glyphicon-arrow-left"></span> Назад
+      <% end %>
+    	
+      <%= button_tag(type: 'submit', class: "btn btn-default") do %>
+        <span class="glyphicon glyphicon-ok"></span> Изменить
+      <% end %>
     </div>
   </div>
 <% end %>
